@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcryptjs')
 var http = require('http')
 var fs = require('fs')
 var path = require('path');
