@@ -1,7 +1,7 @@
 //FILENAME : db.js
 
 const mongoose = require("mongoose");
-
+mongoose.set('useCreateIndex', true)
 // Replace this with your MONGOURI.
 const MONGOURI = "mongodb+srv://dpark:joey1234@cluster0-p65ai.mongodb.net/ServerAPI?retryWrites=true&w=majority";
 
