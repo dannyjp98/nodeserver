@@ -4,11 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannyjp98/nodeserver.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannyjp98/nodeserver/issues"
+  },
+  "homepage": "https://github.com/dannyjp98/nodeserver#readme",
+
   "dependencies": {
     "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
@@ -21,4 +31,5 @@
   "devDependencies": {
     "nodemon": "^2.0.3"
   }
+  
 }
