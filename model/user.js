@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
     }
 });
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 let SALT = 10;
 
 userSchema.pre('save', function(next){
