@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')))
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const MONGOURI = "mongodb+srv://dpark:joey1234@cluster0-p65ai.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -41,7 +42,7 @@ app.get('/users', function(req,res) {
     res.json(users)
 })
 
-app.post('/users/signup', async function(req, res){
+app.post('/users/signup', urlencodedParser, async function(req, res){
     // try {
     //     var hashedPassword = await bcrypt.hash(req.body.password, 10)
     //     var user = {name: req.body.name, password: hashedPassword}
@@ -50,18 +51,18 @@ app.post('/users/signup', async function(req, res){
     // } catch {
     //     res.status(500).send()
     // }
-
+    console.log(req.body)
     const user = new User({
         username: req.body.username,
         password: req.body.password
     }).save((err, response)=>{
-        if(err) res.status(400).send(err)
-        res.status(200).send(response)
+        if(err) return res.json({message: "Account with this username already exists"})
+        res.json({message: "Account created successfully"})
     })
 
 })
 
-app.post('/users/login', async function(req, res){
+app.post('/users/login', urlencodedParser, async function(req, res){
     // console.log(req.body)
     // const user = users.find(user => user.name === req.body.name)
     // console.log(user)
@@ -78,15 +79,15 @@ app.post('/users/login', async function(req, res){
     // } catch {
     //     res.status(500).send()
     // }
-
+    console.log(req.body)
     User.findOne({'username': req.body.username}, (err, user)=> {
         if(!user) return res.json({message:'Login failed, user not found'})
         user.comparePassword(req.body.password, (err, isMatch)=>{
             if(err) throw err;
-            if(!isMatch) return res.status(400).json({
+            if(!isMatch) return res.json({
                 message: 'Wrong Password'
             });
-            res.status(200).send('Logged in successfully')
+            res.status(200).json({message: 'success'})
         })
     })
 });
